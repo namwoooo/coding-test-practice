@@ -1,6 +1,6 @@
 ## 완주하지 못한 선수 lv1
 
-링크: https://school.programmers.co.kr/learn/courses/30/lessons/42576
+링크: https://school.programmers.co.kr/learn/courses/30/lessons/42576 <br />
 풀이 시간: 10분
 
 #### 막혔던 부분
