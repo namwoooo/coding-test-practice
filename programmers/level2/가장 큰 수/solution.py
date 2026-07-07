@@ -1,16 +1,20 @@
-from itertools import permutations
+from functools import cmp_to_key
 
+def compare(x, y):
+    if x + y > y + x:
+        return -1
+    elif x + y == y + x:
+        return 0
+    else:
+        return 1
+    
 def solution(numbers):
+    str_numbers = [str(x) for x in numbers]
     
-    answer = '0'
-    answer_list = []
+    if sum(numbers) == 0:
+        answer = '0'
+    else:
+        str_numbers = sorted(str_numbers, key=cmp_to_key(compare))
+        answer = ''.join(str_numbers)
     
-    for p in permutations(numbers, len(numbers)):
-        answer_list.append(p)
-    
-    for l in range(len(answer_list)):
-        current = ''.join(map(str, answer_list[l]))
-        if int(current) > int(answer):
-            answer = current
-        
     return answer
