@@ -70,3 +70,66 @@
   - 거의 정렬되어 있으면 퀵 정렬보다도 좋은 선택이 될 수 있다.
 
 
+### 퀵 정렬
+
+퀵 정렬은 정렬 알고리즘 중 가장 많이 사용되는 알고리즘 중 하나이다. <br/> 
+퀵 정렬과 병합 정렬은 대부분의 프로그래밍 언어에서 정렬 라이브러리의 근간이 되는 알고리즘이기도 한 빠른 알고리즘들이다.
+<br/>
+<br/>
+
+퀵 정렬은 **기준 데이터를 설정하고 그 기준보다 큰 데이터와 작은 데이터의 위치를 바꾸는** 방식으로 구현된다.
+<br/>
+<br/>
+
+이때 기준 데이터로 **pivot**을 사용하는데, pivot을 설정하고 리스트를 분할하는 방법에 따라 여러 가지 방법으로 퀵 정렬을 구분한다.
+<br/>
+<br/>
+
+가장 대표적인 분할 방식은 **호어 분할**이다.
+
+- 리스트에서 첫 번째 데이터를 pivot으로 정한다.
+- 왼쪽에서부터 pivot보다 큰 데이터를 찾고, 오른쪽에서부터 pivot보다 작은 데이터를 찾아 큰 데이터와 작은 데이터의 위치를 서로 교환한다. (첫 번째로 찾은 수를 선택)
+- 찾는 값의 위치가 서로 엇갈릴 때까지 반복하며, 엇갈리면 반복을 멈추고 pivot을 그 사이에 넣는다.
+- 그러면 pivot을 중심으로 왼쪽은 pivot보다 작은 값만, 오른쪽은 pivot보다 큰 값만 모여 있다.
+- 이 작업을 리스트의 개수가 한 개일 때까지 반복한다.
+
+<br/>
+<br/>
+
+    ```python
+    array = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
+
+    def quick_sort(array, start, end):
+      if start >= end:  # 원소가 1개인 경우
+        return
+      
+      pivot = start
+      left = start + 1
+      right = end
+
+      while left <= right:
+        # pivot보다 큰 데이터를 찾을 때까지 반복
+        while left <= end and array[left] >= array[pivot]:
+          left += 1
+        # pivot보다 작은 데이터를 찾을 때까지 반복
+        while right > start and array[right] =< array[pivot]:
+          right -= 1
+        
+        # 엇갈렸으면 pivot이랑 작은 값(array[right])랑 바꾸기
+        if left > right:
+          array[pivot], array[right] = array[right], array[pivot]
+        else: 
+          array[left], array[right] = array[right], array[left]
+
+      # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행
+      quick_sort(array, start, right - 1)
+      quick_sort(array, right + 1, end)
+
+    quick_sort(array, 0, len(array) - 1)
+    print(array)
+    ```
+
+<br/>
+<br/>
+
+- **시간 복잡도**: O(NlogN) (최악은 O(N<sup>2</sup>))
